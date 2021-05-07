@@ -39,9 +39,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
-          {% raw %}
+          {% raw -%}
           key: ${{ runner.os }}-buildx
-          {% endraw %}
+          {%- endraw %}
       - name: Build the image
         uses: docker/build-push-action@v2
         with:

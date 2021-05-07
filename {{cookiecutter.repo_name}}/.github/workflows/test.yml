@@ -42,21 +42,21 @@ jobs:
       fail-fast: false
       matrix:
         # better to use pinned versions here
-        {% raw %}
+        {% raw -%}
         config:
           - { os: ubuntu-20.04, shell: bash -l }
           - { os: macos-10.15, shell: bash -l }
           - { os: windows-2019, shell: cmd /C CALL }
-        {% endraw %}
-    {% raw %}
+        {%- endraw %}
+    {% raw -%}
     runs-on: ${{ matrix.config.os }}
-    {% endraw %}
+    {%- endraw %}
     defaults:
       run:
         # necessary for conda to work
-        {% raw %}
+        {% raw -%}
         shell: ${{ matrix.config.shell }} {0}
-        {% endraw %}
+        {%- endraw %}
     steps:
       - # get repository code
         name: Checkout code
@@ -65,13 +65,13 @@ jobs:
         name: Cache packages
         uses: actions/cache@v2
         with:
-          {% raw %}
+          {% raw -%}
           path: |
             ${{ env.CONDA_CACHE_DIR }}
             ${{ env.POETRY_CACHE_DIR }}
             ${{ env.PIP_CACHE_DIR }}
           key: ${{ runner.os }}-pkgs-${{ env.CACHE_NUMBER }} }}
-          {% endraw %}
+          {%- endraw %}
       - # create and activate conda environment
         name: Set up environment
         uses: conda-incubator/setup-miniconda@v2
@@ -82,11 +82,11 @@ jobs:
           use-only-tar-bz2: true
       - # set up directories for poetry and pip cache (by default they are different on linux and windows)
         name: Set up poetry cache
-        {% raw %}
+        {% raw -%}
         run: |
           poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}
           pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
-        {% endraw %}
+        {%- endraw %}
       - # install only dependencies
         name: Install dependencies
         working-directory: {{cookiecutter.repo_name}}
