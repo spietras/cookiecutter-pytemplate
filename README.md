@@ -28,3 +28,8 @@ Just look at the example. The features include:
 - example of ```jupyter``` usage
 - provided ```Github Actions``` for testing on different platforms, deploying docs on ```Github Pages``` and testing Docker build
 - ```README``` badges for actions status
+
+## Notes
+
+- Connect to Github with SSH if you want to use Actions. You need that to be able to change anything inside ```.github``` directory.
+- Your repository/project should have short, all-lowercase name. Otherwise you might get unexpected errors in different places.
