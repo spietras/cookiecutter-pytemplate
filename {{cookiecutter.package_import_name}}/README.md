@@ -27,7 +27,9 @@ $ bash miniconda.sh && exec bash
 (base) $ conda activate {{cookiecutter.package_name}}
 ({{cookiecutter.package_name}}) $ cd {{cookiecutter.package_import_name}}
 ({{cookiecutter.package_name}}) $ poetry install --extras dev
+{%- if cookiecutter.executable == 'y' %}
 ({{cookiecutter.package_name}}) $ {{cookiecutter.package_name}}
+{%- endif %}
 ```
 
 ## Quickerstart
@@ -36,7 +38,9 @@ If you just want to try it out and don't care about polluting your environment:
 
 ```sh
 $ python3 -m pip install ./{{cookiecutter.package_import_name}}
+{%- if cookiecutter.executable == 'y' %}
 $ {{cookiecutter.package_name}}
+{%- endif %}
 ```
 
 ## Environment management
@@ -140,14 +144,29 @@ There are defined workflows for:
 
 - testing on different platforms
 - deploying docs to Github Pages
+{%- if cookiecutter.executable == 'y' %}
 - testing Docker builds
+{%- endif %}
+{%- if cookiecutter.automatic_releases == 'y' %}
 - drafting release notes
 - uploading releases to PyPI
+{%- endif %}
 
 For more info see the files in ```.github/workflows``` directory and ```Actions``` tab on Github.
 
 Generally if you see a red mark next to your commit on Github or a failing status on badges in ```README``` it means the commit broke something (or workflows themselves are broken).
 
+{% if cookiecutter.automatic_releases == 'y' -%}
+## Releases
+
+Every time you merge a pull request into main, a draft release is automatically updated, adding the pull request to changelog.
+Changes can be categorized by using labels. You can configure that in ```.github/release-drafter.yml``` file.
+
+Every time you publish a release, the package is uploaded to PyPI with version taken from release tag (ignoring the version in source code).
+You should store your PyPI token in ```PYPI_TOKEN``` secret.
+{%- endif %}
+
+{% if cookiecutter.executable == 'y' -%}
 ## Docker
 
 You can build a Docker image of the package (e.g. for deployment).
@@ -164,7 +183,9 @@ To also run the container in one go, run:
 ```sh
 docker build -t {{cookiecutter.package_name}} . && docker run --rm -it {{cookiecutter.package_name}}
 ```
+{%- endif %}
 
+{% if cookiecutter.jupyter == 'y' -%}
 ## Jupyter
 
 You can use [```jupyter```](https://jupyter.org) to experiment with the code and make some great visualizations or reports.
@@ -176,3 +197,4 @@ jupyter lab
 ```
 
 The developed package is installed in the environment so we can import it in the notebooks as any other package.
+{%- endif %}

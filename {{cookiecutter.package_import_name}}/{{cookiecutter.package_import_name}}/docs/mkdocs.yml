@@ -75,4 +75,6 @@ nav:
   - Home: index.md
   - Usage:
       - Library: usage/library.md
+      {%- if cookiecutter.executable == 'y' %}
       - Command line tool: usage/cli.md
+      {%- endif %}

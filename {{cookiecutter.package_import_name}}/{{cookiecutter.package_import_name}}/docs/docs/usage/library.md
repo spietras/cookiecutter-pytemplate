@@ -1,4 +1,4 @@
-# Usage as a library
+# Usage{% if cookiecutter.executable == 'y' %} as a library{% endif %}
 
 **Very** useful example
 

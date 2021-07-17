@@ -19,15 +19,17 @@ But at least it shows some opinionated best practices about python project struc
 
 ## Installing
 
-Using ```pip```<sup>*</sup>:
+Using ```pip```{% if cookiecutter.automatic_releases != 'y' %}<sup>*</sup>{% endif %}:
 
 ```sh
 pip install {{cookiecutter.package_name}}
 ```
 
+{% if cookiecutter.automatic_releases != 'y' -%}
 <sup><sup>* assuming the authors bothered to release the package on PyPI...</sup></sup>
+{%- endif %}
 
-## Usage as a library
+## Usage{% if cookiecutter.executable == 'y' %} as a library{% endif %}
 
 **Very** useful example:
 
@@ -35,9 +37,11 @@ pip install {{cookiecutter.package_name}}
 import {{cookiecutter.package_import_name}}
 ```
 
+{%- if cookiecutter.executable == 'y' %}
 ## Usage as a command line tool
 
 ```sh
 $ {{cookiecutter.package_name}}
 1
 ```
+{%- endif %}

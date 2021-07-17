@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "{{cookiecutter.package_name}}"
-version = "{{cookiecutter.version}}"
+version = "0.1.0"
 description = "{{cookiecutter.short_description}}"
-readme = 'README.md'
+readme = "README.md"
 authors = ["{{cookiecutter.author}} <{{cookiecutter.author_email}}>"]
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -13,11 +13,14 @@ documentation = "{{cookiecutter.docs_url}}"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-numpy = "^1.20"
+{%- if cookiecutter.executable == 'y' %}
 typer = { version = "^0.3", extras = ["all"] }
+{%- endif %}
 
 # dev
+{%- if cookiecutter.jupyter == 'y' %}
 jupyterlab = { version = "^3", optional = true }
+{%- endif %}
 
 # test
 pytest = { version = "^6", optional = true }
@@ -27,13 +30,15 @@ mkdocs-material = { version = "^7", optional = true }
 
 [tool.poetry.extras]
 # need to do it that way until poetry supports dependency groups: https://github.com/python-poetry/poetry/issues/1644
-dev = ["jupyterlab", "pytest", "mkdocs-material"]
+dev = [{% if cookiecutter.jupyter == 'y' %}"jupyterlab", {%- endif %}"pytest", "mkdocs-material"]
 test = ["pytest"]
 docs = ["mkdocs-material"]
 
+{%- if cookiecutter.executable == 'y' %}
 [tool.poetry.scripts]
 # cli entry point
 {{cookiecutter.package_name}} = "{{cookiecutter.package_import_name}}.__main__:cli"
+{%- endif %}
 
 [build-system]
 # this should be there, see https://python-poetry.org/docs/pyproject/#poetry-and-pep-517

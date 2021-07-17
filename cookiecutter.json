@@ -6,7 +6,9 @@
     "repo_url": "https://github.com/{{cookiecutter.repo_author}}/{{cookiecutter.repo_name}}",
     "docs_url": "https://{{cookiecutter.repo_author}}.github.io/{{cookiecutter.repo_name}}",
     "short_description": "This is a simple example package.",
-    "version": "0.1.0",
+    "executable": "y",
+    "automatic_releases": "n",
+    "jupyter": "y",
     "author": "Example Author",
     "author_email": "author@example.com",
     "year": 2021
