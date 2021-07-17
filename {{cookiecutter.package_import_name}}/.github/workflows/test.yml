@@ -1,0 +1,111 @@
+name: Running tests
+
+on:
+  push:
+    # trigger only on main branch
+    branches:
+      - main
+    # trigger only on changes to the following files
+    paths:
+      - '{{cookiecutter.package_import_name}}/src/**'
+      - '{{cookiecutter.package_import_name}}/tests/**'
+      - 'environment.yml'
+      - '{{cookiecutter.package_import_name}}/poetry.lock'
+      - '{{cookiecutter.package_import_name}}/pyproject.toml'
+      - '.github/workflows/test.yml'
+  pull_request:
+    # trigger only on main branch
+    branches:
+      - main
+    # trigger only on changes to the following files
+    paths:
+      - '{{cookiecutter.package_import_name}}/src/**'
+      - '{{cookiecutter.package_import_name}}/tests/**'
+      - 'environment.yml'
+      - '{{cookiecutter.package_import_name}}/poetry.lock'
+      - '{{cookiecutter.package_import_name}}/pyproject.toml'
+      - '.github/workflows/test.yml'
+
+# env for all jobs
+env:
+  CONDA_CACHE_DIR: ~/conda_pkgs_dir
+  POETRY_CACHE_DIR: ~/.cache/pypoetry
+  PIP_CACHE_DIR: ~/.cache/pip
+  # increase this value to manually reset cache
+  CACHE_NUMBER: 0
+
+jobs:
+  test:
+    name: Run tests
+    strategy:
+      # don't stop all tests if one fails
+      fail-fast: false
+      matrix:
+        # better to use pinned versions here
+        {% raw -%}
+        config:
+          - { os: ubuntu-20.04, shell: bash -l }
+          - { os: macos-10.15, shell: bash -l }
+          - { os: windows-2019, shell: cmd /C CALL }
+        {%- endraw %}
+    {% raw -%}
+    runs-on: ${{ matrix.config.os }}
+    {%- endraw %}
+    defaults:
+      run:
+        # necessary for conda to work
+        {% raw -%}
+        shell: ${{ matrix.config.shell }} {0}
+        {%- endraw %}
+    steps:
+      - # get repository code
+        name: Checkout code
+        uses: actions/checkout@v2
+      - # get conda, poetry and pip cache (persistent between runs)
+        name: Cache packages
+        uses: actions/cache@v2
+        with:
+          {% raw -%}
+          path: |
+            ${{ env.CONDA_CACHE_DIR }}
+            ${{ env.POETRY_CACHE_DIR }}
+            ${{ env.PIP_CACHE_DIR }}
+          key: ${{ runner.os }}-pkgs-${{ env.CACHE_NUMBER }} }}
+          {%- endraw %}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Set up pip cache
+        {% raw -%}
+        run: python3 -m pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
+        {%- endraw %}
+      - name: Install poetry
+        run: python3 -m pip install poetry
+      - name: Set up poetry cache
+        {% raw -%}
+        run: poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}
+        {%- endraw %}
+      - # create and activate conda environment
+        name: Set up environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: {{cookiecutter.package_name}}
+          environment-file: environment.yml
+          # necessary for caching to work
+          use-only-tar-bz2: true
+      - # install only dependencies
+        name: Install dependencies
+        working-directory: {{cookiecutter.package_import_name}}
+        run: poetry install --no-root --extras test
+      - # workaround for non-editable install, waiting for https://github.com/python-poetry/poetry/issues/1382
+        name: Build package
+        working-directory: {{cookiecutter.package_import_name}}
+        run: poetry build -f wheel
+      - # use pip to install wheel produced in previous step
+        name: Install package
+        working-directory: {{cookiecutter.package_import_name}}
+        # python from conda should be called just by 'python', not 'python3'
+        run: python -m pip install --find-links=dist {{cookiecutter.package_name}}[test]
+      - name: Run tests
+        run: pytest {{cookiecutter.package_import_name}}

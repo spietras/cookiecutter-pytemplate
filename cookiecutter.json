@@ -1,6 +1,8 @@
 {
-    "repo_author": "spietras",
-    "repo_name": "pytemplate",
+    "repo_author": "author",
+    "repo_name": "example",
+    "package_name": "{{ cookiecutter.repo_name.lower().replace('.', '-').replace('_', '-') }}",
+    "package_import_name": "{{ cookiecutter.package_name.replace('-', '_') }}",
     "repo_url": "https://github.com/{{cookiecutter.repo_author}}/{{cookiecutter.repo_name}}",
     "docs_url": "https://{{cookiecutter.repo_author}}.github.io/{{cookiecutter.repo_name}}",
     "short_description": "This is a simple example package.",

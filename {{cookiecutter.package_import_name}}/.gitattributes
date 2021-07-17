@@ -1,0 +1,3 @@
+docs/** linguist-documentation
+{{cookiecutter.package_import_name}}/docs/** linguist-documentation
+*.ipynb linguist-documentation
