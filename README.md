@@ -26,10 +26,10 @@ Just look at the example. The features include:
 - provided code for package resource retrieval
 - ```Dockerfile``` for building Docker image of the package
 - example of ```jupyter``` usage
-- provided ```Github Actions``` for testing on different platforms, deploying docs on ```Github Pages``` and testing Docker build
+- provided ```Github Actions``` for testing on different platforms, deploying docs on ```Github Pages```, testing Docker build and making automatic releases
 - ```README``` badges for actions status
 
 ## Notes
 
 - Connect to Github with SSH if you want to use Actions. You need that to be able to change anything inside ```.github``` directory.
-- Your repository/project should have short, all-lowercase name. Otherwise you might get unexpected errors in different places.
+- You should pick a sensible name for your project, preferably all lowercase letter, using dashes and underscores should be the last resort
