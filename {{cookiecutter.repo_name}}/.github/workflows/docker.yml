@@ -7,24 +7,24 @@ on:
       - main
     # trigger only on changes to the following files
     paths:
-      - '{{cookiecutter.package_import_name}}/src/**'
-      - 'environment.yml'
-      - '{{cookiecutter.package_import_name}}/poetry.lock'
-      - '{{cookiecutter.package_import_name}}/pyproject.toml'
-      - 'Dockerfile'
-      - '.github/workflows/docker.yml'
+      - "{{cookiecutter.package_import_name}}/src/**"
+      - "environment.yml"
+      - "{{cookiecutter.package_import_name}}/poetry.lock"
+      - "{{cookiecutter.package_import_name}}/pyproject.toml"
+      - "Dockerfile"
+      - ".github/workflows/docker.yml"
   pull_request:
     # trigger only on main branch
     branches:
       - main
     # trigger only on changes to the following files
     paths:
-      - '{{cookiecutter.package_import_name}}/src/**'
-      - 'environment.yml'
-      - '{{cookiecutter.package_import_name}}/poetry.lock'
-      - '{{cookiecutter.package_import_name}}/pyproject.toml'
-      - 'Dockerfile'
-      - '.github/workflows/docker.yml'
+      - "{{cookiecutter.package_import_name}}/src/**"
+      - "environment.yml"
+      - "{{cookiecutter.package_import_name}}/poetry.lock"
+      - "{{cookiecutter.package_import_name}}/pyproject.toml"
+      - "Dockerfile"
+      - ".github/workflows/docker.yml"
 
 jobs:
   docker:

@@ -19,14 +19,14 @@ But at least it shows some opinionated best practices about python project struc
 
 ## Installing
 
-Using ```pip```{% if cookiecutter.automatic_releases != 'y' %}<sup>*</sup>{% endif %}:
+Using `pip`{% if cookiecutter.automatic_releases != 'y' %}<sup>\*</sup>{% endif %}:
 
 ```sh
 pip install {{cookiecutter.package_name}}
 ```
 
 {% if cookiecutter.automatic_releases != 'y' -%}
-<sup><sup>* assuming the authors bothered to release the package on PyPI...</sup></sup>
+<sup><sup>\* assuming the authors bothered to release the package on PyPI...</sup></sup>
 {%- endif %}
 
 ## Usage{% if cookiecutter.executable == 'y' %} as a library{% endif %}

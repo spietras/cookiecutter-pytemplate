@@ -7,11 +7,11 @@ on:
       - main
     # trigger only on changes to the following files
     paths:
-      - '{{cookiecutter.package_import_name}}/docs/**'
-      - 'environment.yml'
-      - '{{cookiecutter.package_import_name}}/poetry.lock'
-      - '{{cookiecutter.package_import_name}}/pyproject.toml'
-      - '.github/workflows/docs.yml'
+      - "{{cookiecutter.package_import_name}}/docs/**"
+      - "environment.yml"
+      - "{{cookiecutter.package_import_name}}/poetry.lock"
+      - "{{cookiecutter.package_import_name}}/pyproject.toml"
+      - ".github/workflows/docs.yml"
 
 # env for all jobs
 env:
@@ -48,7 +48,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Set up pip cache
         {% raw -%}
         run: python3 -m pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}

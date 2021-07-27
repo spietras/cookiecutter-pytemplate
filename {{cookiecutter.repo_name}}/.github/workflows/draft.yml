@@ -7,13 +7,13 @@ on:
       - main
     # trigger only on changes to the following files
     paths:
-      - '{{cookiecutter.package_import_name}}/src/**'
-      - '{{cookiecutter.package_import_name}}/LICENSE'
-      - '{{cookiecutter.package_import_name}}/README.md'
-      - '{{cookiecutter.package_import_name}}/poetry.lock'
-      - '{{cookiecutter.package_import_name}}/pyproject.toml'
-      - '.github/workflows/draft.yml'
-      - '.github/release-drafter.yml'
+      - "{{cookiecutter.package_import_name}}/src/**"
+      - "{{cookiecutter.package_import_name}}/LICENSE"
+      - "{{cookiecutter.package_import_name}}/README.md"
+      - "{{cookiecutter.package_import_name}}/poetry.lock"
+      - "{{cookiecutter.package_import_name}}/pyproject.toml"
+      - ".github/workflows/draft.yml"
+      - ".github/release-drafter.yml"
 
 jobs:
   draft:

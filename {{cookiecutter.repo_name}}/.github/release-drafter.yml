@@ -1,14 +1,14 @@
-name-template: {% raw -%}'$RESOLVED_VERSION'{%- endraw %}
-tag-template: {% raw -%}'$RESOLVED_VERSION'{%- endraw %}
+name-template: {% raw -%}"$RESOLVED_VERSION"{%- endraw %}
+tag-template: {% raw -%}"$RESOLVED_VERSION"{%- endraw %}
 categories:
-  - title: '🚀 Features'
+  - title: "🚀 Features"
     labels:
-      - 'feature'
-  - title: '🐛 Bug Fixes'
+      - "feature"
+  - title: "🐛 Bug Fixes"
     labels:
-      - 'bug'
+      - "bug"
 exclude-labels:
-  - 'skip-changelog'
+  - "skip-changelog"
 change-title-escapes: '\<*_&'
 template: |
   ## What’s new
