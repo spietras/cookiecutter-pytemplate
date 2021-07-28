@@ -25,14 +25,10 @@ jupyterlab = { version = "^3", optional = true }
 # test
 pytest = { version = "^6", optional = true }
 
-# docs
-mkdocs-material = { version = "^7", optional = true }
-
 [tool.poetry.extras]
 # need to do it that way until poetry supports dependency groups: https://github.com/python-poetry/poetry/issues/1644
-dev = [{% if cookiecutter.jupyter == 'y' %}"jupyterlab", {% endif %}"pytest", "mkdocs-material"]
+dev = [{% if cookiecutter.jupyter == 'y' %}"jupyterlab", {% endif %}"pytest"]
 test = ["pytest"]
-docs = ["mkdocs-material"]
 
 {%- if cookiecutter.executable == 'y' %}
 [tool.poetry.scripts]
