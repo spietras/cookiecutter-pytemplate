@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:4.9.2-alpine
+FROM continuumio/miniconda3:4.10.3-alpine
 
 # add bash, because it's not available by default on alpine
 # also install poetry
