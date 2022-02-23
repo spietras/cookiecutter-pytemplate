@@ -39,7 +39,7 @@ jobs:
         run: python3 -m pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
         {%- endraw %}
       - name: Install poetry
-        run: python3 -m pip install poetry
+        run: python3 -m pip install -r requirements.txt
       - name: Set up poetry cache
         {% raw -%}
         run: poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}

@@ -9,9 +9,10 @@ on:
     paths:
       - "{{cookiecutter.package_import_name}}/src/**"
       - "{{cookiecutter.package_import_name}}/tests/**"
-      - "environment.yml"
       - "{{cookiecutter.package_import_name}}/poetry.lock"
       - "{{cookiecutter.package_import_name}}/pyproject.toml"
+      - "environment.yml"
+      - "requirements.txt"
       - ".github/workflows/test.yml"
   pull_request:
     # trigger only on main branch
@@ -21,9 +22,10 @@ on:
     paths:
       - "{{cookiecutter.package_import_name}}/src/**"
       - "{{cookiecutter.package_import_name}}/tests/**"
-      - "environment.yml"
       - "{{cookiecutter.package_import_name}}/poetry.lock"
       - "{{cookiecutter.package_import_name}}/pyproject.toml"
+      - "environment.yml"
+      - "requirements.txt"
       - ".github/workflows/test.yml"
 
 # env for all jobs
@@ -81,7 +83,7 @@ jobs:
         run: python3 -m pip config set global.cache-dir ${{ env.PIP_CACHE_DIR }}
         {%- endraw %}
       - name: Install poetry
-        run: python3 -m pip install poetry
+        run: python3 -m pip install -r requirements.txt
       - name: Set up poetry cache
         {% raw -%}
         run: poetry config cache-dir ${{ env.POETRY_CACHE_DIR }}
