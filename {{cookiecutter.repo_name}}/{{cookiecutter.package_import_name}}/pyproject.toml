@@ -14,16 +14,16 @@ documentation = "{{cookiecutter.docs_url}}"
 [tool.poetry.dependencies]
 python = "^3.9"
 {%- if cookiecutter.executable == 'y' %}
-typer = { version = "^0.3", extras = ["all"] }
+typer = { version = "^0.4", extras = ["all"] }
 {%- endif %}
 
 # dev
 {%- if cookiecutter.jupyter == 'y' %}
-jupyterlab = { version = "^3", optional = true }
+jupyterlab = { version = "^3.2", optional = true }
 {%- endif %}
 
 # test
-pytest = { version = "^6", optional = true }
+pytest = { version = "^7.0", optional = true }
 
 [tool.poetry.extras]
 # need to do it that way until poetry supports dependency groups: https://github.com/python-poetry/poetry/issues/1644
