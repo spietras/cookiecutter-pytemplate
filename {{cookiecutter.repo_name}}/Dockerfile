@@ -34,6 +34,6 @@ COPY ./{{cookiecutter.package_import_name}}/LICENSE ./{{cookiecutter.package_imp
 
 # build wheel by poetry and install by pip (to force non-editable mode)
 RUN poetry build -f wheel && \
-    python -m pip install --no-cache-dir --find-links=dist {{cookiecutter.package_name}}
+    python -m pip install --no-index --no-cache-dir --find-links=dist {{cookiecutter.package_name}}
 
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "{{cookiecutter.package_name}}", "{{cookiecutter.package_name}}"]
