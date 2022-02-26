@@ -3,6 +3,7 @@ import shutil
 
 EXECUTABLE_PATHS = [
     "Dockerfile",
+    ".dockerignore",
     ".github/workflows/docker-build.yml",
     ".github/workflows/docker-push.yml",
     "{{ cookiecutter.package_import_name }}/tests/functional",
