@@ -28,10 +28,10 @@ class Test{{cookiecutter.package_name.replace("-", "")|title}}:
         assert result.output
 
     def test_{{cookiecutter.package_import_name}}_prints_help(self, runner):
-        result = runner.invoke(cli, ['--help'])
+        result = runner.invoke(cli, ["--help"])
         assert "Usage" in result.output
 
     def test_{{cookiecutter.package_import_name}}_works_with_arg(self, runner):
-        result = runner.invoke(cli, ['--x', 2])
+        result = runner.invoke(cli, ["--x", 2])
         assert not result.exception
         assert result.exit_code == 0
