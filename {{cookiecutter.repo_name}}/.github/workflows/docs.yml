@@ -1,6 +1,7 @@
 name: Deploying docs
 
 on:
+  workflow_dispatch:
   push:
     # trigger only on main branch
     branches:
