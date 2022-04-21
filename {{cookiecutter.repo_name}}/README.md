@@ -2,6 +2,8 @@
 
 <div align="center">
 
+{{cookiecutter.short_description}}
+
 [![Running tests]({{cookiecutter.repo_url}}/actions/workflows/test.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/test.yml)
 [![Deploying docs]({{cookiecutter.repo_url}}/actions/workflows/docs.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/docs.yml)
 
