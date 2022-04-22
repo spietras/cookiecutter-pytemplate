@@ -7,15 +7,11 @@ version = "0.1.0"
 description = "{{cookiecutter.short_description}}"
 readme = "{{cookiecutter.package_import_name}}/README.md"
 authors = ["{{cookiecutter.author}} <{{cookiecutter.author_email}}>"]
-classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent"
-]
+classifiers = ["License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"]
 repository = "{{cookiecutter.repo_url}}"
 documentation = "{{cookiecutter.docs_url}}"
-packages = [
-    { include = "{{cookiecutter.package_name}}", from = "{{cookiecutter.package_import_name}}/src" },
-]
+packages = [{ include = "{{cookiecutter.package_name}}", from = "{{cookiecutter.package_import_name}}/src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"

@@ -4,10 +4,8 @@ version = "0.1.0"
 description = "{{cookiecutter.short_description}}"
 readme = "README.md"
 authors = ["{{cookiecutter.author}} <{{cookiecutter.author_email}}>"]
-classifiers = [
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent"
-]
+classifiers = ["License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"]
 repository = "{{cookiecutter.repo_url}}"
 documentation = "{{cookiecutter.docs_url}}"
 
