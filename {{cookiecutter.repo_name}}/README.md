@@ -181,6 +181,9 @@ consistency. There are defined workflows for:
   {%- if cookiecutter.automatic_releases == 'y' %}
 - drafting release notes
 - uploading releases to PyPI
+  {%- if cookiecutter.executable == 'y' %}
+- publishing Docker images
+  {%- endif %}
   {%- endif %}
 
 For more info see the files in `.github/workflows` directory and `Actions` tab
@@ -197,16 +200,21 @@ Every time you merge a pull request into main, a draft release is automatically
 updated, adding the pull request to changelog. Changes can be categorized by
 using labels. You can configure that in `.github/release-drafter.yml` file.
 
-Every time you publish a release, the package is uploaded to PyPI with version
-taken from release tag (ignoring the version in source code). You should store
-your PyPI token in `PYPI_TOKEN` secret. {%- endif %}
+Every time you publish a release:
+
+- the package is uploaded to PyPI with version taken from release tag (you
+  should store your PyPI token in `PYPI_TOKEN` secret)
+  {%- if cookiecutter.executable == 'y' %}
+- the Docker image is built and uploaded to GitHub registry with tag taken from
+  release tag
+  {%- endif %}
+{%- endif %}
 
 {% if cookiecutter.executable == 'y' -%}
 ## Docker
 
 You can build a Docker image of the package (e.g. for deployment). The build
-process is defined in `Dockerfile`
-and it's optimized to keep the size small.
+process is defined in `Dockerfile` and it's optimized to keep the size small.
 
 To build the image, run from project root:
 
