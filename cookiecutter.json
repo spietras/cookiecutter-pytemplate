@@ -7,6 +7,7 @@
   "docs_url": "https://{{cookiecutter.repo_author}}.github.io/{{cookiecutter.repo_name}}",
   "short_description": "This is a simple example package.",
   "executable": "y",
+  "extensive_testing": "y",
   "automatic_releases": "n",
   "jupyter": "y",
   "author": "Example Author",

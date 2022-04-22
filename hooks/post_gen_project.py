@@ -1,26 +1,8 @@
 import os
 import shutil
 
-EXECUTABLE_PATHS = [
-    "Dockerfile",
-    ".dockerignore",
-    ".github/workflows/docker-build.yml",
-    ".github/workflows/docker-push.yml",
-    "{{ cookiecutter.package_import_name }}/tests/functional",
-    "{{ cookiecutter.package_import_name }}/src/{{ cookiecutter.package_import_name }}/__main__.py",
-    "{{ cookiecutter.package_import_name }}/docs/docs/usage/cli.md",
-]
-
-AUTOMATIC_RELEASES_PATHS = [
-    ".github/release-drafter.yml",
-    ".github/workflows/draft.yml",
-    ".github/workflows/pypi.yml",
-    ".github/workflows/docker-push.yml",
-]
-
-JUPYTER_PATHS = ["notebooks"]
-
 executable = "{{ cookiecutter.executable }}" == "y"
+extensive_testing = "{{ cookiecutter.extensive_testing }}" == "y"
 automatic_releases = "{{ cookiecutter.automatic_releases }}" == "y"
 jupyter = "{{ cookiecutter.jupyter }}" == "y"
 
@@ -32,14 +14,44 @@ def remove(path):
         shutil.rmtree(path)
 
 
+to_remove = []
+
 if not executable:
-    for path in EXECUTABLE_PATHS:
-        remove(path)
+    to_remove.extend(
+        [
+            "Dockerfile",
+            ".dockerignore",
+            ".github/workflows/test-docker.yml",
+            ".github/workflows/registry.yml",
+            "{{ cookiecutter.package_import_name }}/tests/functional",
+            "{{ cookiecutter.package_import_name }}/src/{{ cookiecutter.package_import_name }}/__main__.py",
+            "{{ cookiecutter.package_import_name }}/docs/docs/usage/cli.md",
+        ]
+    )
+
+if executable and not extensive_testing:
+    to_remove.extend(
+        [
+            ".github/workflows/test-multiplatform.yml",
+        ]
+    )
 
 if not automatic_releases:
-    for path in AUTOMATIC_RELEASES_PATHS:
-        remove(path)
+    to_remove.extend(
+        [
+            ".github/release-drafter.yml",
+            ".github/workflows/draft.yml",
+            ".github/workflows/pypi.yml",
+            ".github/workflows/registry.yml",
+        ]
+    )
 
 if not jupyter:
-    for path in JUPYTER_PATHS:
-        remove(path)
+    to_remove.extend(
+        [
+            "notebooks",
+        ]
+    )
+
+for path in set(to_remove):
+    remove(path)

@@ -1,4 +1,4 @@
-name: Deploying docs
+name: Docs
 
 on:
   workflow_dispatch:
@@ -18,7 +18,7 @@ env:
   CACHE_NUMBER: 0
 
 jobs:
-  deploy-docs:
+  docs:
     name: Deploy docs
     # better to use pinned version here
     runs-on: ubuntu-20.04

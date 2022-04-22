@@ -1,4 +1,4 @@
-name: Updating draft release
+name: Draft
 
 on:
   workflow_dispatch:

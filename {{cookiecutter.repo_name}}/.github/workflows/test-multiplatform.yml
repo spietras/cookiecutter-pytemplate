@@ -1,4 +1,4 @@
-name: Running tests
+name: Multiplatform tests
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ on:
       - "{{cookiecutter.package_import_name}}/pyproject.toml"
       - "environment.yml"
       - "requirements.txt"
-      - ".github/workflows/test.yml"
+      - ".github/workflows/test-multiplatform.yml"
   pull_request:
     # trigger only on main branch
     branches:
@@ -27,7 +27,7 @@ on:
       - "{{cookiecutter.package_import_name}}/pyproject.toml"
       - "environment.yml"
       - "requirements.txt"
-      - ".github/workflows/test.yml"
+      - ".github/workflows/test-multiplatform.yml"
 
 # env for all jobs
 env:

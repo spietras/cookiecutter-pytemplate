@@ -1,6 +1,6 @@
 ARG MINICONDA_IMAGE_TAG=4.10.3-alpine
 
-FROM continuumio/miniconda3:$MINICONDA_IMAGE_TAG
+FROM continuumio/miniconda3:$MINICONDA_IMAGE_TAG AS base
 
 # add bash, because it's not available by default on alpine
 RUN apk add --no-cache bash
@@ -26,6 +26,27 @@ SHELL ["conda", "run", "--no-capture-output", "-n", "{{cookiecutter.package_name
 COPY ./{{cookiecutter.package_import_name}}/pyproject.toml ./{{cookiecutter.package_import_name}}/poetry.lock /tmp/{{cookiecutter.package_import_name}}/
 WORKDIR /tmp/{{cookiecutter.package_import_name}}
 
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "{{cookiecutter.package_name}}"]
+
+FROM base AS test
+
+# install dependencies only (notice that no source code is present yet) and delete cache
+RUN poetry install --no-root --extras test && \
+    rm -rf ~/.cache/pypoetry
+
+# add source, tests and necessary files
+COPY ./{{cookiecutter.package_import_name}}/src/ /tmp/{{cookiecutter.package_import_name}}/src/
+COPY ./{{cookiecutter.package_import_name}}/tests/ /tmp/{{cookiecutter.package_import_name}}/tests/
+COPY ./{{cookiecutter.package_import_name}}/LICENSE ./{{cookiecutter.package_import_name}}/README.md /tmp/{{cookiecutter.package_import_name}}/
+
+# build wheel by poetry and install by pip (to force non-editable mode)
+RUN poetry build -f wheel && \
+    python -m pip install --no-deps --no-index --no-cache-dir --find-links=dist {{cookiecutter.package_name}}
+
+CMD ["pytest"]
+
+FROM base AS production
+
 # install dependencies only (notice that no source code is present yet) and delete cache
 RUN poetry install --no-root && \
     rm -rf ~/.cache/pypoetry
@@ -38,4 +59,4 @@ COPY ./{{cookiecutter.package_import_name}}/LICENSE ./{{cookiecutter.package_imp
 RUN poetry build -f wheel && \
     python -m pip install --no-deps --no-index --no-cache-dir --find-links=dist {{cookiecutter.package_name}}
 
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "{{cookiecutter.package_name}}", "{{cookiecutter.package_name}}"]
+CMD ["{{cookiecutter.package_name}}"]

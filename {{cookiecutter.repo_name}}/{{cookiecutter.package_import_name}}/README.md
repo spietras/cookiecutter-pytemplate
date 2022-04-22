@@ -4,8 +4,17 @@
 
 {{cookiecutter.short_description}}
 
-[![Running tests]({{cookiecutter.repo_url}}/actions/workflows/test.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/test.yml)
-[![Deploying docs]({{cookiecutter.repo_url}}/actions/workflows/docs.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/docs.yml)
+{% if cookiecutter.executable != 'y' -%}
+[![Tests]({{cookiecutter.repo_url}}/actions/workflows/test-multiplatform.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/test-multiplatform.yml)
+{% endif -%}
+{% if cookiecutter.executable == 'y' and cookiecutter.extensive_testing != 'y' -%}
+[![Tests]({{cookiecutter.repo_url}}/actions/workflows/test-docker.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/test-docker.yml)
+{% endif -%}
+{% if cookiecutter.executable == 'y' and cookiecutter.extensive_testing == 'y' -%}
+[![Multiplatform tests]({{cookiecutter.repo_url}}/actions/workflows/test-multiplatform.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/test-multiplatform.yml)
+[![Docker tests]({{cookiecutter.repo_url}}/actions/workflows/test-docker.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/test-docker.yml)
+{% endif -%}
+[![Docs]({{cookiecutter.repo_url}}/actions/workflows/docs.yml/badge.svg)]({{cookiecutter.repo_url}}/actions/workflows/docs.yml)
 
 </div>
 

@@ -1,5 +1,6 @@
 *
 !{{cookiecutter.package_import_name}}/src/**
+!{{cookiecutter.package_import_name}}/tests/**
 !{{cookiecutter.package_import_name}}/pyproject.toml
 !{{cookiecutter.package_import_name}}/poetry.lock
 !{{cookiecutter.package_import_name}}/LICENSE
