@@ -47,9 +47,9 @@ jobs:
         # better to use pinned versions here
         {% raw -%}
         config:
-          - { os: ubuntu-20.04, shell: bash -l }
-          - { os: macos-10.15, shell: bash -l }
-          - { os: windows-2019, shell: cmd /C CALL }
+          - { os: ubuntu-latest, shell: bash -l }
+          - { os: macos-latest, shell: bash -l }
+          - { os: windows-latest, shell: cmd /C CALL }
         {%- endraw %}
     {% raw -%}
     runs-on: ${{ matrix.config.os }}
